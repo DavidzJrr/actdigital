@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using Desafio.Application.Requests;
 using Desafio.Application.Services;
 using Desafio.Models;
