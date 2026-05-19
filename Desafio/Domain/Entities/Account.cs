@@ -1,5 +1,4 @@
 using Desafio.Domain.ValueObjects;
-using System;
 
 namespace Desafio.Domain.Entities;
 

@@ -1,5 +1,3 @@
-using System.Diagnostics;
-using System.Threading.Tasks;
 using Desafio.Application.Requests;
 using Desafio.Application.Services;
 using Desafio.Models;

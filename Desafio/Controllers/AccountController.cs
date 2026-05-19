@@ -1,4 +1,3 @@
-using System.Threading.Tasks;
 using Desafio.Application.Requests;
 using Desafio.Application.Results;
 using Desafio.Application.Services;

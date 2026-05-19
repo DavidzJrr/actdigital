@@ -1,13 +1,7 @@
-using System;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 using Amazon.DynamoDBv2.DataModel;
-using Amazon.DynamoDBv2.DocumentModel;
 using Desafio.Domain.Entities;
 using Desafio.Domain.Repositories;
 using Desafio.Domain.ValueObjects;
-using Microsoft.Extensions.Configuration;
 
 namespace Desafio.Infrastructure.Persistence;
 
