@@ -50,6 +50,7 @@ public sealed class DynamoDbAccountRepository : IAccountRepository
             Cpf = account.Cpf.Value,
             Agency = account.Agency.Value,
             Account = account.Number.Value,
+            ClientName = account.ClientName,
             PixLimit = account.PixLimit.Amount,
             Balance = account.Balance.Amount,
             DailyLimitConsumed = account.DailyLimitConsumed.Amount,
@@ -84,6 +85,7 @@ public sealed class DynamoDbAccountRepository : IAccountRepository
             new Cpf(item.Cpf),
             new AgencyNumber(item.Agency),
             new AccountNumber(item.Account),
+            item.ClientName,
             new Money(item.PixLimit),
             audit,
             Guid.Parse(item.AccountId),
@@ -107,6 +109,9 @@ public sealed class DynamoDbAccountRepository : IAccountRepository
 
         [DynamoDBProperty("Account")]
         public string Account { get; set; } = string.Empty;
+
+        [DynamoDBProperty("ClientName")]
+        public string ClientName { get; set; } = string.Empty;
 
         [DynamoDBProperty("PixLimit")]
         public decimal PixLimit { get; set; }

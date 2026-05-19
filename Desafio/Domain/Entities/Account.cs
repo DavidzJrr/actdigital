@@ -9,18 +9,22 @@ public sealed class Account
     public Cpf Cpf { get; }
     public AgencyNumber Agency { get; }
     public AccountNumber Number { get; }
+    public string ClientName { get; }
     public Money PixLimit { get; private set; }
     public LimitAudit? LimitAudit { get; private set; }
     public Money Balance { get; private set; }
     public Money DailyLimitConsumed { get; private set; }
     public DateOnly DailyLimitConsumedAt { get; private set; }
 
-    public Account(Cpf cpf, AgencyNumber agency, AccountNumber number, Money pixLimit, LimitAudit? limitAudit = null, Guid? accountId = null, Money? balance = null, Money? dailyLimitConsumed = null, DateOnly? dailyLimitConsumedAt = null)
+    public Account(Cpf cpf, AgencyNumber agency, AccountNumber number, string clientName, Money pixLimit, LimitAudit? limitAudit = null, Guid? accountId = null, Money? balance = null, Money? dailyLimitConsumed = null, DateOnly? dailyLimitConsumedAt = null)
     {
         AccountId = accountId ?? Guid.NewGuid();
         Cpf = cpf ?? throw new ArgumentNullException(nameof(cpf));
         Agency = agency ?? throw new ArgumentNullException(nameof(agency));
         Number = number ?? throw new ArgumentNullException(nameof(number));
+        ClientName = string.IsNullOrWhiteSpace(clientName)
+            ? throw new ArgumentException("Client name is required.", nameof(clientName))
+            : clientName;
         PixLimit = pixLimit ?? throw new ArgumentNullException(nameof(pixLimit));
         LimitAudit = limitAudit;
         Balance = balance ?? Money.Zero;

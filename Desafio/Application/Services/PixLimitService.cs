@@ -46,6 +46,7 @@ public sealed class PixLimitService
             new Cpf(request.Cpf),
             new AgencyNumber(request.Agency),
             new AccountNumber(request.Account),
+            request.ClientName,
             Money.Default);
 
         await _accountRepository.SaveAsync(account, cancellationToken);
