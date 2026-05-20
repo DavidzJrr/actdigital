@@ -40,7 +40,6 @@ c:\dev\actdigital\Desafio\Desafio\obj\Debug\net8.0\ref\Desafio.dll
 C:\dev\actdigital\Desafio\bin\Debug\net8.0\appsettings.Development.json
 C:\dev\actdigital\Desafio\bin\Debug\net8.0\appsettings.json
 C:\dev\actdigital\Desafio\bin\Debug\net8.0\Desafio.staticwebassets.runtime.json
-C:\dev\actdigital\Desafio\bin\Debug\net8.0\Desafio.exe
 C:\dev\actdigital\Desafio\bin\Debug\net8.0\Desafio.deps.json
 C:\dev\actdigital\Desafio\bin\Debug\net8.0\Desafio.runtimeconfig.json
 C:\dev\actdigital\Desafio\bin\Debug\net8.0\Desafio.dll

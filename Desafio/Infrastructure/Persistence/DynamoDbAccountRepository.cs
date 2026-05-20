@@ -13,7 +13,7 @@ public sealed class DynamoDbAccountRepository : IAccountRepository
     public DynamoDbAccountRepository(IDynamoDBContext context, IConfiguration configuration)
     {
         _context = context ?? throw new ArgumentNullException(nameof(context));
-        _tableName = configuration.GetValue<string>("Aws:TableName") ?? "BankAccounts";
+        _tableName = "BankAccounts";
     }
 
     public async Task<Account?> GetByCpfAsync(Cpf cpf, CancellationToken cancellationToken = default)
@@ -43,7 +43,7 @@ public sealed class DynamoDbAccountRepository : IAccountRepository
             AccountId = account.AccountId.ToString(),
             Cpf = account.Cpf.Value,
             Agency = account.Agency.Value,
-            Account = account.Number.Value,
+            AccountNumber = account.Number.Value,
             ClientName = account.ClientName,
             PixLimit = account.PixLimit.Amount,
             Balance = account.Balance.Amount,
@@ -78,7 +78,7 @@ public sealed class DynamoDbAccountRepository : IAccountRepository
         return new Account(
             new Cpf(item.Cpf),
             new AgencyNumber(item.Agency),
-            new AccountNumber(item.Account),
+            new AccountNumber(item.AccountNumber),
             item.ClientName,
             new Money(item.PixLimit),
             audit,
@@ -101,8 +101,8 @@ public sealed class DynamoDbAccountRepository : IAccountRepository
         [DynamoDBProperty("Agency")]
         public string Agency { get; set; } = string.Empty;
 
-        [DynamoDBProperty("Account")]
-        public string Account { get; set; } = string.Empty;
+        [DynamoDBProperty("AccountNumber")]
+        public string AccountNumber { get; set; } = string.Empty;
 
         [DynamoDBProperty("ClientName")]
         public string ClientName { get; set; } = string.Empty;

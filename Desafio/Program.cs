@@ -1,6 +1,7 @@
 using Amazon;
 using Amazon.DynamoDBv2;
 using Amazon.DynamoDBv2.DataModel;
+using Desafio.Application.Events;
 using Desafio.Application.Services;
 using Desafio.Domain.Repositories;
 using Desafio.Domain.Services;
@@ -31,9 +32,11 @@ builder.Services.AddSingleton<IDynamoDBContext>(sp =>
 builder.Services.AddScoped<IAccountRepository, DynamoDbAccountRepository>();
 builder.Services.AddScoped<IAnalystRepository, DynamoDbAnalystRepository>();
 builder.Services.AddScoped<PixLimitEvaluator>();
-builder.Services.AddScoped<PixLimitService>();
-builder.Services.AddScoped<AnalystService>();
-builder.Services.AddScoped<AccountBalanceService>();
+builder.Services.AddScoped<IPixLimitService, PixLimitService>();
+builder.Services.AddScoped<IAnalystService, AnalystService>();
+builder.Services.AddScoped<IDomainEventDispatcher, DomainEventDispatcher>();
+builder.Services.AddScoped(typeof(IDomainEventHandler<>), typeof(LoggingDomainEventHandler<>));
+builder.Services.AddScoped<IAccountBalanceService, AccountBalanceService>();
 
 var app = builder.Build();
 

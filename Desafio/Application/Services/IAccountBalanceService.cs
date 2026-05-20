@@ -2,6 +2,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Desafio.Application.Requests;
 using Desafio.Application.Results;
+using Desafio.Domain.ValueObjects;
 
 namespace Desafio.Application.Services;
 
@@ -26,6 +27,16 @@ public interface IAccountBalanceService
     /// Apenas aumenta o saldo, sem impacto em limite PIX.
     /// </summary>
     Task DepositAsync(DepositRequest request, CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Consulta o saldo atual da conta identificada por CPF.
+    /// </summary>
+    Task<Money?> GetBalanceAsync(string cpf, CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Consulta o limite de transferência disponível para o dia atual da conta identificada por CPF.
+    /// </summary>
+    Task<Money?> GetAvailableDailyLimitAsync(string cpf, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Processa uma transferência/PIX com validações de saldo e limite diário.

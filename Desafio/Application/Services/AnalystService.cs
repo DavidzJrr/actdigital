@@ -7,7 +7,7 @@ using Desafio.Domain.Repositories;
 
 namespace Desafio.Application.Services;
 
-public sealed class AnalystService
+public sealed class AnalystService : IAnalystService
 {
     private readonly IAnalystRepository _analystRepository;
 

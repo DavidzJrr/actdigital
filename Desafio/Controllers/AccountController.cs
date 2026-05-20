@@ -9,13 +9,47 @@ namespace Desafio.Controllers;
 [Route("api/[controller]")]
 public sealed class AccountController : ControllerBase
 {
-    private readonly PixLimitService _pixLimitService;
-    private readonly AccountBalanceService _accountBalanceService;
+    private readonly IPixLimitService _pixLimitService;
+    private readonly IAccountBalanceService _accountBalanceService;
 
-    public AccountController(PixLimitService pixLimitService, AccountBalanceService accountBalanceService)
+    public AccountController(IPixLimitService pixLimitService, IAccountBalanceService accountBalanceService)
     {
         _pixLimitService = pixLimitService;
         _accountBalanceService = accountBalanceService;
+    }
+
+    [HttpPost("balance")]
+    public async Task<ActionResult<AccountBalanceResult>> GetBalanceAsync([FromBody] AccountLookupRequest request)
+    {
+        if (request is null || string.IsNullOrWhiteSpace(request.Cpf))
+        {
+            return BadRequest("CPF is required to consult balance.");
+        }
+
+        var balance = await _accountBalanceService.GetBalanceAsync(request.Cpf);
+        if (balance is null)
+        {
+            return NotFound("Account not found.");
+        }
+
+        return Ok(new AccountBalanceResult(balance.Amount));
+    }
+
+    [HttpPost("available-daily-limit")]
+    public async Task<ActionResult<AvailableDailyLimitResult>> GetAvailableDailyLimitAsync([FromBody] AccountLookupRequest request)
+    {
+        if (request is null || string.IsNullOrWhiteSpace(request.Cpf))
+        {
+            return BadRequest("CPF is required to consult available daily limit.");
+        }
+
+        var availableDailyLimit = await _accountBalanceService.GetAvailableDailyLimitAsync(request.Cpf);
+        if (availableDailyLimit is null)
+        {
+            return NotFound("Account not found.");
+        }
+
+        return Ok(new AvailableDailyLimitResult(availableDailyLimit.Amount));
     }
 
     [HttpPost("register")]

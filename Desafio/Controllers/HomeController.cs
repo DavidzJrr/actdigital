@@ -9,9 +9,9 @@ namespace Desafio.Controllers;
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
-    private readonly AnalystService _analystService;
+    private readonly IAnalystService _analystService;
 
-    public HomeController(ILogger<HomeController> logger, AnalystService analystService)
+    public HomeController(ILogger<HomeController> logger, IAnalystService analystService)
     {
         _logger = logger;
         _analystService = analystService;

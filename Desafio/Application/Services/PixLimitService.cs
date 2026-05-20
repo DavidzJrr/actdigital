@@ -10,7 +10,7 @@ using Desafio.Domain.ValueObjects;
 
 namespace Desafio.Application.Services;
 
-public sealed class PixLimitService
+public sealed class PixLimitService : IPixLimitService
 {
     private readonly IAccountRepository _accountRepository;
     private readonly PixLimitEvaluator _pixLimitEvaluator;
